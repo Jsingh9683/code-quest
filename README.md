@@ -16,7 +16,7 @@ Follow these steps to get the Code Quest application up and running quickly:
 1. **Clone the Repository:**
 
     ```bash
-    git clone https://github.com/your-repo/code-quest.git
+    git clone https://github.com/Jsingh9683/code-quest.git
     cd code-quest
     ```
 
