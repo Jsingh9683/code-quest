@@ -1,6 +1,3 @@
-Here's a `README.md` file formatted with the details you provided:
-
-```markdown
 # Code Quest
 
 Code Quest is an educational application designed for kids. It includes four interactive games to enhance their knowledge and learning. The games are focused on general knowledge, math, and animal identification, making learning fun and engaging. Parents can monitor their children's performance through a comprehensive dashboard.
@@ -90,6 +87,3 @@ Follow these steps to get the Code Quest application up and running quickly:
 - **Production Environment:**
     - Ensure your server is running the application and accessible over the internet.
     - Navigate to your server's IP address or domain name to access the application.
-```
-
-Feel free to adjust any specifics, such as the repository URL or any additional setup steps, as needed!
