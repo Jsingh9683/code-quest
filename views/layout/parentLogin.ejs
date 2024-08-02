@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeQuest</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/stuLogin.css" />
+    <script src="/js/loginSignupValidation.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="title-text">
+        <div class="title login">Parent</div>
+        <div class="title signup">Signup</div>
+      </div>
+      <div class="form-container">
+        <div class="slide-controls">
+          <input type="radio" name="slide" id="login" checked />
+          <input type="radio" name="slide" id="signup" />
+          <label for="login" class="slide login">Login</label>
+          <label for="signup" class="slide signup">Signup</label>
+          <div class="slider-tab"></div>
+        </div>
+        <div class="form-inner">
+          <form
+            action="/parentLogin"
+            method="POST"
+            id="parentLoginForm"
+            class="login"
+          >
+            <div class="field">
+              <input
+                type="text"
+                name="email"
+                placeholder="Email Address"
+                required
+              />
+            </div>
+            <div class="field">
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <!-- <div class="pass-link"><a href="#">Forgot password?</a></div> -->
+            <div class="field btn">
+              <div class="btn-layer"></div>
+              <input type="submit" value="Login" />
+            </div>
+            <br />
+
+            <div class="btn btn-premium btn-lg react-signup">
+              Login as child? <a href="/home"> Click Here!</a> <br />
+            </div>
+          </form>
+          <form action="/signup" method="post" class="signup">
+            <div class="field">
+              <input type="text" name="name" placeholder="Name" required />
+            </div>
+            <div class="field">
+              <input
+                type="text"
+                name="email"
+                placeholder="Email Address"
+                required
+              />
+            </div>
+            <div class="field">
+              <input
+                type="password"
+                name="parentPassword"
+                placeholder="Parent Password"
+                required
+              />
+            </div>
+            <div class="field">
+              <input
+                type="password"
+                name="childPassword"
+                placeholder="Child Password"
+                required
+              />
+            </div>
+            <div class="field btn">
+              <div class="btn-layer"></div>
+              <input type="submit" value="Signup" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const parentLoginForm = document.getElementById("parentLoginForm");
+
+        parentLoginForm.addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent default form submission
+
+          const formData = new FormData(parentLoginForm);
+          const email = formData.get("email");
+          const password = formData.get("password");
+
+          fetch("/parentLogin", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.error) {
+                // Handle error
+                console.error("Error:", data.error);
+                alert("Login failed: " + data.error);
+              } else {
+                // Save user data to local storage
+                localStorage.setItem("parentUser", JSON.stringify(data.user));
+
+                // Redirect to dashboard
+                window.location.href = "/parentDashboard";
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              alert("An error occurred during login. Please try again.");
+            });
+        });
+      });
+    </script>
+    <script src="/js/parentLogin.js"></script>
+  </body>
+</html>

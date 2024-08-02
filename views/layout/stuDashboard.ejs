@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/stuLogin.css" />
+    <link rel="stylesheet" href="/css/nameDisplay.css" />
+    <title>Student Dashboard</title>
+  </head>
+  <body
+    style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    "
+  >
+    <header class="header">
+      <h1>Welcome, <span id="userName">Guest</span>!</h1>
+
+      <!-- Logout Button positioned at the top right corner -->
+      <button onclick="location.href='/';" class="logout-button">Logout</button>
+    </header>
+
+    <div class="tagline">
+      <h1>Welcome to the world of challenges!!</h1>
+      <p>Unleash Your Potential, One Challenge at a Time!</p>
+    </div>
+
+    <div class="challenges">
+      <div class="maths">
+        <a href="/maths"
+          ><img src="/public/assets/maths1.png" alt="image of maths category"
+        /></a>
+      </div>
+      <div class="rational">
+        <a href="/logicalgames"
+          ><img
+            src="/public/assets/rational.jpeg"
+            alt="image of rational reasoning"
+        /></a>
+      </div>
+      <div class="general">
+        <a href="/general"
+          ><img
+            src="/public/assets/general.webp"
+            alt="image of general knowledge"
+        /></a>
+      </div>
+    </div>
+  </body>
+  <script src="/js/nameDisplay.js"></script>
+</html>

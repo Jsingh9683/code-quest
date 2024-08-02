@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Game Over</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-image: url("/assets/fbg.png");
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 1rem;
+      }
+
+      #final-score {
+        font-size: 1.5rem;
+        color: #555;
+        margin-bottom: 2rem;
+      }
+    </style>
+
+    <link rel="stylesheet" href="/css/nameDisplay.css" />
+  </head>
+  <body>
+    <div class="score-user">
+      <h1>Hey! <span id="userName">Guest</span></h1>
+      <h1>&nbsp;</h1>
+      <h1>Game Over</h1>
+    </div>
+    <h1 id="high-Score">Your High score is:</h1>
+
+    <p id="final-score">Your score: 0</p>
+
+    <br />
+
+    <a class="btn1" href="/objectrecognition">Restart Game</a>
+    <a class="btn1" href="/logicalgames">Exit Game</a>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const score = localStorage.getItem("objectGameScore");
+        document.querySelector(
+          "#final-score"
+        ).textContent = `Your score: ${score}`;
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        function displayHighScore() {
+          const highScore = localStorage.getItem("objecthighScore");
+
+          if (highScore) {
+            const highScoreValue = JSON.parse(highScore);
+            document.getElementById(
+              "high-Score"
+            ).innerText = `Your High score is: ${highScoreValue}`;
+          } else {
+            document.getElementById("high-Score").innerText =
+              "Your High score is: Not available";
+          }
+        }
+
+        displayHighScore();
+      });
+    </script>
+    <script src="/js/objectgameLogic.js"></script>
+    <script src="/js/nameDisplay.js"></script>
+  </body>
+</html>

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parent Dashboard</title>
+    <link rel="stylesheet" href="/css/parentDashboard.css" />
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="content-area">
+      <div class="container-fluid">
+        <!-- <h1 class="mt-4 mb-4">Parent Dashboard</h1> -->
+        <div class="name-center">
+          <h1><span id="userName">Guest</span>'s Dashboard</h1>
+          <button id="btn" class="btn btn-primary">Logout</button>
+        </div>
+
+        <div class="row mt-5 mb-4">
+          <div class="col-md-6">
+            <div class="box">
+              <div id="generalQuestionsChart" class="chart"></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="box">
+              <div id="mathChart" class="chart"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4 mb-4">
+          <div class="col-md-6">
+            <div class="box">
+              <div id="objectChart" class="chart"></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="box">
+              <div id="wordsChart" class="chart"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4 mb-4">
+          <div class="col-md-6">
+            <div class="box">
+              <div id="barChart" class="chart"></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="box">
+              <div id="pieChart" class="chart"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="row mt-4 mb-4">
+        <div class="col-md-12">
+          <div class="box">
+            <div id="heatmapChart" class="chart"></div>
+          </div>
+        </div>
+      </div> -->
+
+        <div class="row mt-4 mb-4">
+          <div class="col-md-12">
+            <div class="box">
+              <div id="globalChart" class="chart"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const parentUser = JSON.parse(localStorage.getItem("parentUser"));
+
+        if (parentUser) {
+          const userID = parentUser.id;
+          const userNameS = parentUser.userName;
+
+          fetch(`/api/parentDashboardData?userId=${userID}`)
+            .then((response) => response.json())
+            .then((data) => {
+              const generalQuestionsScores = data.generalQuestionsScores;
+              const mathScores = data.mathScores;
+              const objectScores = data.objectScores;
+              const wordsScores = data.wordsScores;
+
+              if (parentUser && parentUser.userName) {
+                const userNameElement = document.getElementById("userName");
+                userNameElement.textContent = parentUser.userName;
+              } else {
+                console.error("User data not found in localStorage.");
+              }
+
+              // Create charts
+              const generalQuestionsChart = new ApexCharts(
+                document.querySelector("#generalQuestionsChart"),
+                {
+                  chart: {
+                    toolbar: {
+                      show: true,
+                      tools: {
+                        download: true,
+                        selection: true,
+                        zoom: false,
+                        zoomin: false,
+                        zoomout: false,
+                        pan: true,
+                        reset: true,
+                      },
+                    },
+                    type: "line",
+                    height: 350,
+                  },
+
+                  series: [
+                    {
+                      name: "Scores",
+                      data: generalQuestionsScores.map((score) => score.score),
+                    },
+                  ],
+                  xaxis: {
+                    categories: generalQuestionsScores.map((score) =>
+                      new Date(score.date).toLocaleDateString()
+                    ),
+                  },
+                  title: {
+                    text: "General Questions Scores",
+                  },
+                  fill: {
+                    type: "gradient",
+                    gradient: {
+                      shade: "light",
+                      type: "horizontal",
+                      shadeIntensity: 0.6,
+                      gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
+                      inverseColors: false,
+                      opacityFrom: 1,
+                      opacityTo: 1,
+                      stops: [0, 90, 100],
+                      colorStops: [],
+                    },
+                  },
+                  stroke: {
+                    curve: "smooth",
+                  },
+                  colors: ["#008FFB"],
+                }
+              );
+              generalQuestionsChart.render();
+
+              const mathChart = new ApexCharts(
+                document.querySelector("#mathChart"),
+                {
+                  chart: {
+                    toolbar: {
+                      show: true,
+                      tools: {
+                        download: true,
+                        selection: true,
+                        zoom: false,
+                        zoomin: false,
+                        zoomout: false,
+                        pan: true,
+                        reset: true,
+                      },
+                    },
+                    type: "line",
+                    height: 350,
+                  },
+                  series: [
+                    {
+                      name: "Scores",
+                      data: mathScores.map((score) => score.score),
+                    },
+                  ],
+                  xaxis: {
+                    categories: mathScores.map((score) =>
+                      new Date(score.createdAt).toLocaleDateString()
+                    ),
+                  },
+                  title: {
+                    text: "Math Scores",
+                  },
+                  stroke: {
+                    curve: "smooth",
+                  },
+                  colors: ["#00E396"],
+                  fill: {
+                    type: "gradient",
+                    gradient: {
+                      shade: "light",
+                      type: "horizontal",
+                      shadeIntensity: 0.6,
+                      gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
+                      inverseColors: false,
+                      opacityFrom: 1,
+                      opacityTo: 1,
+                      stops: [0, 90, 100],
+                      colorStops: [],
+                    },
+                  },
+                }
+              );
+              mathChart.render();
+
+              const objectChart = new ApexCharts(
+                document.querySelector("#objectChart"),
+                {
+                  chart: {
+                    toolbar: {
+                      show: true,
+                      tools: {
+                        download: true,
+                        selection: true,
+                        zoom: false,
+                        zoomin: false,
+                        zoomout: false,
+                        pan: true,
+                        reset: true,
+                      },
+                    },
+                    type: "line",
+                    height: 350,
+                  },
+                  series: [
+                    {
+                      name: "Scores",
+                      data: objectScores.map((score) => score.score),
+                    },
+                  ],
+                  xaxis: {
+                    categories: objectScores.map((score) =>
+                      new Date(score.createdAt).toLocaleDateString()
+                    ),
+                  },
+                  title: {
+                    text: "Object Recognition Scores",
+                  },
+                  stroke: {
+                    curve: "smooth",
+                  },
+                  colors: ["#FEB019"],
+                  fill: {
+                    type: "gradient",
+                    gradient: {
+                      shade: "light",
+                      type: "horizontal",
+                      shadeIntensity: 0.6,
+                      gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
+                      inverseColors: false,
+                      opacityFrom: 1,
+                      opacityTo: 1,
+                      stops: [0, 90, 100],
+                      colorStops: [],
+                    },
+                  },
+                }
+              );
+              objectChart.render();
+
+              const wordsChart = new ApexCharts(
+                document.querySelector("#wordsChart"),
+                {
+                  chart: {
+                    toolbar: {
+                      show: true,
+                      tools: {
+                        download: true,
+                        selection: true,
+                        zoom: false,
+                        zoomin: false,
+                        zoomout: false,
+                        pan: true,
+                        reset: true,
+                      },
+                    },
+                    type: "line",
+                    height: 350,
+                  },
+                  series: [
+                    {
+                      name: "Scores",
+                      data: wordsScores.map((score) => score.score),
+                    },
+                  ],
+                  xaxis: {
+                    categories: wordsScores.map((score) =>
+                      new Date(score.createdAt).toLocaleDateString()
+                    ),
+                  },
+                  title: {
+                    text: "Words Game Scores",
+                  },
+                  stroke: {
+                    curve: "smooth",
+                  },
+                  colors: ["#FF4560"],
+                  fill: {
+                    type: "gradient",
+                    gradient: {
+                      shade: "light",
+                      type: "horizontal",
+                      shadeIntensity: 0.6,
+                      gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
+                      inverseColors: false,
+                      opacityFrom: 1,
+                      opacityTo: 1,
+                      stops: [0, 90, 100],
+                      colorStops: [],
+                    },
+                  },
+                }
+              );
+              wordsChart.render();
+
+              const globalChart = new ApexCharts(
+                document.querySelector("#globalChart"),
+                {
+                  chart: {
+                    toolbar: {
+                      show: true,
+                      tools: {
+                        download: true,
+                        selection: true,
+                        zoom: false,
+                        zoomin: false,
+                        zoomout: false,
+                        pan: true,
+                        reset: true,
+                      },
+                    },
+                    type: "line",
+                    height: 350,
+                  },
+                  stroke: {
+                    curve: "smooth",
+                  },
+                  markers: {
+                    size: 1,
+                  },
+                  series: [
+                    {
+                      type: "line",
+                      name: "Words Game",
+                      data: wordsScores.map((score) => score.score),
+                    },
+
+                    {
+                      type: "line",
+                      name: "Gk Score",
+                      data: generalQuestionsScores.map((score) => score.score),
+                    },
+
+                    {
+                      type: "line",
+                      name: "Math Score",
+                      data: mathScores.map((score) => score.score),
+                    },
+
+                    {
+                      type: "line",
+                      name: "Object Score",
+                      data: objectScores.map((score) => score.score),
+                    },
+                  ],
+                  //   xaxis: {
+                  //     categories: wordsScores.map((score) =>
+                  //       new Date(score.createdAt).toLocaleDateString()
+                  //     ),
+                  //   },
+                  title: {
+                    text: "Global Scores",
+                  },
+                }
+              );
+              globalChart.render();
+
+              //   ---------------------------extra---------------------------------
+
+              const barChart = new ApexCharts(
+                document.querySelector("#barChart"),
+                {
+                  chart: {
+                    toolbar: {
+                      show: true,
+                      tools: {
+                        download: true,
+                        selection: true,
+                        zoom: false,
+                        zoomin: false,
+                        zoomout: false,
+                        pan: true,
+                        reset: true,
+                      },
+                    },
+                    type: "bar",
+                    height: 350,
+                  },
+                  series: [
+                    {
+                      name: "General Questions",
+                      data: [
+                        generalQuestionsScores.reduce((a, b) => a + b.score, 0),
+                      ],
+                    },
+                    {
+                      name: "Math",
+                      data: [mathScores.reduce((a, b) => a + b.score, 0)],
+                    },
+                    {
+                      name: "Object Recognition",
+                      data: [objectScores.reduce((a, b) => a + b.score, 0)],
+                    },
+                    {
+                      name: "Words",
+                      data: [wordsScores.reduce((a, b) => a + b.score, 0)],
+                    },
+                  ],
+                  xaxis: {
+                    categories: ["Scores"],
+                    title: {
+                      text: "Game Types",
+                    },
+                  },
+                  yaxis: {
+                    title: {
+                      text: "Total Score",
+                    },
+                  },
+                  title: {
+                    text: "Total Scores by Game Type",
+                  },
+                }
+              );
+              barChart.render();
+
+              const pieChart = new ApexCharts(
+                document.querySelector("#pieChart"),
+                {
+                  chart: {
+                    toolbar: {
+                      show: true,
+                      tools: {
+                        download: true,
+                        selection: true,
+                        zoom: false,
+                        zoomin: false,
+                        zoomout: false,
+                        pan: true,
+                        reset: true,
+                      },
+                    },
+                    type: "pie",
+                    height: 350,
+                  },
+                  series: [
+                    generalQuestionsScores.reduce((a, b) => a + b.score, 0),
+                    mathScores.reduce((a, b) => a + b.score, 0),
+                    objectScores.reduce((a, b) => a + b.score, 0),
+                    wordsScores.reduce((a, b) => a + b.score, 0),
+                  ],
+                  labels: [
+                    "General Questions",
+                    "Math",
+                    "Object Recognition",
+                    "Words",
+                  ],
+                  title: {
+                    text: "Score Distribution by Game Type",
+                  },
+                }
+              );
+              pieChart.render();
+
+              //   ------------------heap------------------------
+              const heatmapData = mathScores.map((score) => [
+                new Date(score.createdAt).toLocaleDateString(),
+                score.score,
+              ]);
+
+              const heatmapChart = new ApexCharts(
+                document.querySelector("#heatmapChart"),
+                {
+                  chart: {
+                    toolbar: {
+                      show: true,
+                      tools: {
+                        download: true,
+                        selection: true,
+                        zoom: false,
+                        zoomin: false,
+                        zoomout: false,
+                        pan: true,
+                        reset: true,
+                      },
+                    },
+                    type: "heatmap",
+                    height: 350,
+                  },
+                  series: [
+                    {
+                      name: "Math Scores",
+                      data: heatmapData,
+                    },
+                  ],
+                  xaxis: {
+                    type: "category",
+                    title: {
+                      text: "Date",
+                    },
+                  },
+                  yaxis: {
+                    title: {
+                      text: "Score",
+                    },
+                  },
+                  title: {
+                    text: "Math Scores Heatmap",
+                  },
+                }
+              );
+              heatmapChart.render();
+
+              // ------------------------------extra over -----------------------------------------
+            })
+            .catch((error) => console.error("Error fetching data:", error));
+
+          document.getElementById("btn").addEventListener("click", function () {
+            localStorage.removeItem("parentUser"); // Correctly remove parentUser
+            window.location.href = "/"; // Redirect to main page
+          });
+        } else {
+          console.error("No parentUser found in local storage.");
+          window.location.href = "/"; // Redirect if no user data is found
+        }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  </body>
+</html>

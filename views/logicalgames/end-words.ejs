@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Game Over</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-image: url("/assets/fbg.png");
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
+      }
+
+      /* Heading Styling */
+      h1 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 1rem;
+      }
+
+      /* Final Score Styling */
+      #final-score {
+        font-size: 1.5rem;
+        color: #555;
+        margin-bottom: 2rem;
+      }
+    </style>
+
+    <link rel="stylesheet" href="/css/nameDisplay.css" />
+  </head>
+  <body>
+    <div class="end-game">
+      <h1>Hey! <span id="userName">Guest</span></h1>
+      <!-- <h1>&nbsp;</h1> -->
+      <h1>Game Over</h1>
+
+      <h1 id="high-Score-words">Your High Score is: 0</h1>
+      <h2 id="final-score">Your Score: 0</h2>
+    </div>
+    <a class="btn" href="/wordsgame">Restart Game</a>
+    <a class="btn" href="/logicalgames">Exit Game</a>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const finalScore = localStorage.getItem("wordsgameScore");
+        document.getElementById(
+          "final-score"
+        ).textContent = `Your Score: ${finalScore}`;
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        function displaywordsHighScore() {
+          const highScore = localStorage.getItem("wordshighScore");
+
+          if (highScore) {
+            const highScoreValue = JSON.parse(highScore);
+            document.getElementById(
+              "high-Score-words"
+            ).innerText = `Your High score is: ${highScoreValue}`;
+          } else {
+            document.getElementById("high-Score").innerText =
+              "Your High score is: Not available";
+          }
+        }
+
+        displaywordsHighScore();
+      });
+    </script>
+
+    <script src="/js/nameDisplay.js"></script>
+  </body>
+</html>

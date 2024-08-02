@@ -1,0 +1,327 @@
+/* header  */
+
+.header {
+  overflow: hidden;
+  /* background-color: rgba(0, 0, 0, 0.05); */
+
+  padding: 8px 10px;
+  z-index: 100;
+}
+
+.header a {
+  float: left;
+  /* color: #f1f1f1; */
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.header-right {
+  float: right;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* padding: 10px 20px; */
+}
+
+/* General Body and Layout Styles */
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+
+  overflow: hidden;
+  height: 100vh;
+  place-items: center;
+  background-image: url("../assets/fbg.png");
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+
+  overflow: hidden;
+  height: 100vh;
+  place-items: center;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* Section Wrapper */
+.section-wrapper {
+  position: relative;
+  margin: 2rem;
+  /* margin-top: 15rem; */
+}
+.sw1 {
+  /* position: relative; */
+  /* margin: 2rem; */
+  margin-top: 3rem;
+}
+.sw2 {
+  position: relative;
+  margin: 2rem;
+  margin-top: 5rem;
+  /* margin-top: 15rem; */
+}
+
+.illustration {
+  position: absolute;
+  left: -50px; /* Move the image outside the background */
+  z-index: 2;
+}
+
+.illustration:hover {
+  transform: scale(1.1);
+  /* opacity: 0.8;  */
+}
+
+.kid-img {
+  position: absolute;
+  left: 10px; /* Move the image further outside the background */
+  top: -53px;
+  width: auto;
+  height: 130%; /* Increase the size */
+  max-height: 400px; /* Adjust the max height */
+  z-index: 2;
+}
+
+.parent-img {
+  position: absolute;
+  left: -35px; /* Move the image further outside the background */
+  top: -60px;
+  width: auto;
+  height: 150%; /* Increase the size */
+  max-height: 400px; /* Adjust the max height */
+  z-index: 2;
+}
+
+.login-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0; /* Increase padding for a larger background */
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  margin: 0 50px 0 80px;
+  padding: 80px 0 80px 0;
+  /* margin: top right bottom left; */
+}
+
+.kid {
+  background: url("../assets/bg11.jpg") repeat center center;
+
+  height: 200%; /* Increase background height */
+}
+
+.parent {
+  background: url("../assets/bg12.jpg") repeat center center;
+
+  height: 200%; /* Increase background height */
+}
+
+.background-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.login-button {
+  padding: 25px 50px; /* Increase padding for larger button */
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  z-index: 3;
+}
+
+.login-button:hover {
+  background-color: #333;
+}
+
+.khosa-container {
+  /* border-radius: 2rem;
+  border: 4px double #000; 
+  padding: 10px;  */
+
+  margin-left: 15rem;
+  margin-right: 15rem;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+@media only screen and (max-width: 1300px) {
+  .khosa-container {
+    margin-left: 8rem;
+    margin-right: 8rem;
+    margin-top: 0;
+    margin-bottom: 0.1rem;
+  }
+
+  .login-section {
+    padding: 60px 0;
+    margin: 0 35px 0 60px;
+    padding: 60px 0 60px 0;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .khosa-container {
+    margin-left: 5rem;
+    margin-right: 5rem;
+    margin-top: 0;
+    margin-bottom: 0.1rem;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .login-section {
+    padding: 50px 0;
+    margin: 0 30px 0 50px;
+    padding: 50px 0 50px 0;
+  }
+
+  .kid-img {
+    left: 10px;
+    top: -53px;
+    width: auto;
+    height: 130%; /* Increase the size */
+    max-height: 400px; /* Adjust the max height */
+  }
+
+  .parent-img {
+    left: -35px; /* Move the image further outside the background */
+    top: -40px;
+    width: auto;
+    height: 140%; /* Increase the size */
+    max-height: 400px; /* Adjust the max height */
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .kid-img {
+    left: 10px;
+    top: -30px;
+    width: auto;
+    height: 120%; /* Increase the size */
+  }
+
+  .parent-img {
+    left: -35px; /* Move the image further outside the background */
+    top: -15px;
+    width: auto;
+    height: 130%; /* Increase the size */
+  }
+
+  .login-section {
+    margin: 0 10px 0 20px;
+    padding: 35px 0 35px 0;
+  }
+
+  .login-button {
+    padding: 15px 25px; /* Increase padding for larger button */
+
+    border-radius: 5px;
+  }
+
+  .khosa-container {
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 0.1rem;
+  }
+
+  .kid {
+    height: 20vh;
+  }
+
+  .parent {
+    height: 20vh;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .parent-img {
+    left: -90px;
+    top: -15px;
+
+    height: 130%;
+  }
+
+  .khosa-container {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .parent-img {
+    left: -90px;
+    top: 10px;
+    height: 110%;
+  }
+
+  .khosa-container {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 0;
+  }
+
+  .kid-img {
+    left: -35px;
+    top: -32px;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .parent-img {
+    display: none;
+  }
+
+  .kid-img {
+    display: none;
+  }
+
+  .khosa-container {
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+
+  .section-wrapper {
+    margin: 0rem;
+    margin-top: 2rem;
+  }
+}

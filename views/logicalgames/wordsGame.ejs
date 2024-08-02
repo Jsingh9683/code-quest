@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Words Game</title>
+    <link rel="stylesheet" type="text/css" href="/css/logicalgamestyle.css" />
+  </head>
+  <body>
+    <div class="game">
+      <h1 class="instructions"></h1>
+      <div class="score">
+        <h2><span id="current-question">Question: 1</span><span>/10</span></h2>
+        <br />
+        <h2><span id="current-score">Score: 0</span></h2>
+      </div>
+      <div class="game-cat">
+        <div class="game-words">
+          <div id="word-object"></div>
+          <div id="word-text"></div>
+        </div>
+        <div class="options">
+          <div class="option-1">
+            <div class="answer-1"></div>
+            <button id="yellow" class="option"></button>
+          </div>
+          <div class="option-2">
+            <div class="answer-2"></div>
+            <button id="green" class="option"></button>
+          </div>
+          <div class="option-3">
+            <div class="answer-3"></div>
+            <button id="blue" class="option"></button>
+          </div>
+        </div>
+      </div>
+      <button id="return-main-menu"></button>
+    </div>
+
+    <div class="result hidden" id="correct">
+      <div class="icon"></div>
+      <h1>Good</h1>
+    </div>
+
+    <div class="result hidden" id="incorrect">
+      <div class="icon"></div>
+      <h1>Bad</h1>
+    </div>
+
+    <script src="/js/db.js"></script>
+    <script src="/js/wordsGameLogic.js"></script>
+  </body>
+</html>

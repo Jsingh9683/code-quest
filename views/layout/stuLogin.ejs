@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeQuest</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/stuLogin.css" />
+    <script src="/js/loginSignupValidation.js" defer></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="title-text">
+        <div class="title login">Kid Login</div>
+      </div>
+      <div class="form-container">
+        <div class="form-inner">
+          <form id="loginForm" class="login">
+            <div class="field">
+              <input
+                type="text"
+                id="email"
+                name="email"
+                placeholder="Email Address"
+                required
+              />
+            </div>
+            <div class="field">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <!-- <div class="pass-link"><a href="#">Forgot password?</a></div> -->
+            <div class="field btn">
+              <div class="btn-layer"></div>
+              <input type="submit" value="Login" />
+            </div>
+            <!-- <div class="signup-link">
+              Not a member? <a href="#">Signup now</a>
+            </div> --><br />
+            <div class="btn btn-premium btn-lg react-signup">
+              Not a member? <a href="/parentLogin#signup"> Signup now</a>
+              <br />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+
+          fetch("/stuLogin", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                return response.json().then((data) => {
+                  throw new Error(data.error || "Login failed");
+                });
+              }
+              return response.json();
+            })
+
+            .then((data) => {
+              console.log("testing data", data.user);
+              if (data.user) {
+                // Save user info to localStorage
+                localStorage.setItem(
+                  "user",
+                  JSON.stringify({
+                    id: data.user.id,
+                    email: data.user.email,
+                    userName: data.user.userName,
+                  })
+                );
+
+                console.log("User info saved in localStorage:", data.user);
+
+                // Redirect to dashboard
+                window.location.href = "/stuDashboard";
+              }
+            })
+            .catch((error) => {
+              console.error("Login error:", error);
+              alert("Invalid login credentials. Please try again.");
+            });
+        });
+    </script>
+  </body>
+</html>

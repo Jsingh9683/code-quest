@@ -1,0 +1,77 @@
+body {
+  background-color: #eff4f7 !important;
+  /* color: #777 !important; */
+  font-family: "Titillium Web", Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
+  font-weight: 600;
+}
+
+.content-area {
+  max-width: 1070px;
+  margin: 0 auto;
+}
+
+.name-center {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+}
+
+.btn {
+  font-size: 1rem !important;
+  padding: 0.4rem 0 !important;
+  width: 8rem !important;
+  text-align: center !important;
+  border: 0.1rem solid #56a5eb !important;
+  margin-bottom: 1rem !important;
+  text-decoration: nonev;
+  color: #56a5eb !important;
+  background-color: white !important;
+}
+
+.btn:hover {
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5) !important;
+  transform: translateY(-0.1rem) !important;
+  transition: transform 150ms !important;
+}
+
+.btn[disabled]:hover {
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.box {
+  box-shadow: 0px 1px 22px -12px #607d8b;
+  background-color: #fff;
+  padding: 25px 35px 25px 30px;
+  max-height: 444px;
+}
+
+.sparkboxes .box {
+  padding: 3px 0 0 0;
+  position: relative;
+}
+
+#spark1,
+#spark2,
+#spark3,
+#spark4 {
+  position: relative;
+  padding-top: 15px;
+}
+
+@media screen and (max-width: 760px) {
+  .box {
+    padding: 25px 0;
+  }
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CodeQuest Game</title>
+    <link rel="stylesheet" type="text/css" href="/css/logicalgamestyle.css" />
+    <link rel="stylesheet" href="/css/nameDisplay.css" />
+  </head>
+  <body>
+    <div class="main">
+      <h1>Hello <span id="userName">Guest</span></h1>
+      <div class="menu-1">
+        <h1 id="instructions">Select a game category</h1>
+      </div>
+      <div class="categories">
+        <div class="category" id="recognize-objects">
+          <div class="cat-img"></div>
+          <div class="cat-name">Object Recognition</div>
+        </div>
+        <div class="category" id="words">
+          <div class="cat-img"></div>
+          <div class="cat-name">Words</div>
+        </div>
+      </div>
+      <br />
+      <!-- <button id="exitGame" class="btn exit-btn">Exit Game</button> -->
+      <a class="btn" href="/stuDashboard">Exit</a>
+    </div>
+    <script>
+      document.querySelectorAll(".category").forEach((divCat) => {
+        divCat.addEventListener("click", () => {
+          const id = divCat.id;
+
+          if (id === "recognize-objects") {
+            window.location.href = "objectrecognition";
+          } else if (id === "words") {
+            window.location.href = "wordsgame";
+          } else {
+            console.log("No game is executed check mainMenu");
+          }
+        });
+      });
+    </script>
+    <script src="/js/nameDisplay.js"></script>
+  </body>
+</html>
